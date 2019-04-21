@@ -54,14 +54,46 @@
 		ADA47C17226D2D4D00500FAA /* Companies */ = {
 			isa = PBXGroup;
 			children = (
-				ADA47C18226D2D4D00500FAA /* AppDelegate.swift */,
+				ADA47C2D226D2E7600500FAA /* SupportingFiles */,
+				ADA47C2A226D2E5100500FAA /* Model */,
+				ADA47C2B226D2E5D00500FAA /* View */,
+				ADA47C2C226D2E6300500FAA /* Controller */,
+			);
+			path = Companies;
+			sourceTree = "<group>";
+		};
+		ADA47C2A226D2E5100500FAA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		ADA47C2B226D2E5D00500FAA /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		ADA47C2C226D2E6300500FAA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
 				ADA47C1A226D2D4D00500FAA /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		ADA47C2D226D2E7600500FAA /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				ADA47C18226D2D4D00500FAA /* AppDelegate.swift */,
 				ADA47C1C226D2D4D00500FAA /* Main.storyboard */,
 				ADA47C1F226D2D4F00500FAA /* Assets.xcassets */,
 				ADA47C21226D2D4F00500FAA /* LaunchScreen.storyboard */,
 				ADA47C24226D2D4F00500FAA /* Info.plist */,
 			);
-			path = Companies;
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -283,13 +315,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = N768D33P28;
-				INFOPLIST_FILE = Companies/Info.plist;
+				DEVELOPMENT_TEAM = 8J7JFF5D87;
+				INFOPLIST_FILE = "$(SRCROOT)/Companies/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Hikaru.Companies;
+				PRODUCT_BUNDLE_IDENTIFIER = com.HikaruWatanabe.Companies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -301,13 +333,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = N768D33P28;
-				INFOPLIST_FILE = Companies/Info.plist;
+				DEVELOPMENT_TEAM = 8J7JFF5D87;
+				INFOPLIST_FILE = "$(SRCROOT)/Companies/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Hikaru.Companies;
+				PRODUCT_BUNDLE_IDENTIFIER = com.HikaruWatanabe.Companies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
