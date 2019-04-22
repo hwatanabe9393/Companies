@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class CreateCompanyController: UIViewController {
     var delegate: CreateCompanyControllerDelegate?
@@ -48,9 +49,27 @@ class CreateCompanyController: UIViewController {
     
     @objc func handleSave(){
         dismiss(animated: true){[weak self] in
-            if let name = self?.createCompanyView.nameTextField.text, name.count > 0{
-                let company = Company(name: name, founded: Date())
-                self?.delegate?.didAddCompany(company: company)
+            guard let name = self?.createCompanyView.nameTextField.text else{
+                return
+            }
+            
+            // Initialization core data stack
+            let persistentContainer = NSPersistentContainer(name: "CompaniesModels")
+            persistentContainer.loadPersistentStores(completionHandler: { (storeDescription, error) in
+                if let error = error{
+                    fatalError("Loading of store failed: \(error)")
+                }
+            })
+            let context = persistentContainer.viewContext
+            let company = NSEntityDescription.insertNewObject(forEntityName: "Company", into: context)
+            
+            company.setValue(name, forKey: "name")
+            
+            //Perform core data save
+            do{
+                try context.save()
+            }catch let error{
+                print("Error while saving CD: \(error)")
             }
         }
     }

@@ -7,13 +7,17 @@
 //
 
 import UIKit
+import CoreData
 
 class CompaniesController: UITableViewController, CreateCompanyControllerDelegate {
     let companyCellId = "companyCellId"
     var companies = [Company]()
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        fetchCompanies()
     }
     
     ///Set up initialize UI layouts and attributes
@@ -30,6 +34,25 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "reset", style: .plain, target: self, action: #selector(handleAddCompany(_:)))
     }
     
+    fileprivate func fetchCompanies(){
+        // Initialization core data stack
+        let persistentContainer = NSPersistentContainer(name: "CompaniesModels")
+        persistentContainer.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error{
+                fatalError("Loading of store failed: \(error)")
+            }
+        })
+        let context = persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<Company>(entityName: "Company")
+        do{
+            self.companies = try context.fetch(fetchRequest)
+            tableView.reloadData()
+        }catch let error{
+            print("Failed to fetch companies: \(error)")
+        }
+        
+    }
+    
     @objc func handleAddCompany(_ sender: Any){
         let createCompanyController = CreateCompanyController()
         createCompanyController.delegate = self
@@ -42,13 +65,17 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
         //TODO:- Reset company
     }
     
+    
+    
     //MARK:- CreateCompanyController
     func didAddCompany(company: Company) {
         self.companies.append(company)
         
         let indexPath = IndexPath(row: self.companies.count - 1, section: 0)
-        self.tableView.insertRows(at: [indexPath], with: .automatic)
+        self.tableView.insertRows(at: [indexPath], with: .fade)
     }
+    
+    
     
     //MARK:- TableView
     override func numberOfSections(in tableView: UITableView) -> Int {

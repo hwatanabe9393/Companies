@@ -19,6 +19,7 @@
 		ADA47C3D226D5F0700500FAA /* CreateCompanyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA47C3C226D5F0700500FAA /* CreateCompanyController.swift */; };
 		ADA47C3F226D662600500FAA /* CreateCompanyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA47C3E226D662600500FAA /* CreateCompanyView.swift */; };
 		ADA47C42226D8CAE00500FAA /* CreateCompanyControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA47C41226D8CAE00500FAA /* CreateCompanyControllerDelegate.swift */; };
+		ADA47C45226D901600500FAA /* CompaniesModels.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ADA47C43226D901600500FAA /* CompaniesModels.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		ADA47C3C226D5F0700500FAA /* CreateCompanyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCompanyController.swift; sourceTree = "<group>"; };
 		ADA47C3E226D662600500FAA /* CreateCompanyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCompanyView.swift; sourceTree = "<group>"; };
 		ADA47C41226D8CAE00500FAA /* CreateCompanyControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCompanyControllerDelegate.swift; sourceTree = "<group>"; };
+		ADA47C44226D901600500FAA /* CompaniesModels.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CompaniesModels.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +70,7 @@
 		ADA47C17226D2D4D00500FAA /* Companies */ = {
 			isa = PBXGroup;
 			children = (
-				ADA47C40226D8C9E00500FAA /* Delegate */,
+				ADA47C40226D8C9E00500FAA /* Protocol */,
 				ADA47C36226D520600500FAA /* Extension */,
 				ADA47C2D226D2E7600500FAA /* SupportingFiles */,
 				ADA47C2A226D2E5100500FAA /* Model */,
@@ -111,6 +113,7 @@
 				ADA47C1C226D2D4D00500FAA /* Main.storyboard */,
 				ADA47C21226D2D4F00500FAA /* LaunchScreen.storyboard */,
 				ADA47C24226D2D4F00500FAA /* Info.plist */,
+				ADA47C43226D901600500FAA /* CompaniesModels.xcdatamodeld */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -149,12 +152,12 @@
 			path = Comapnies;
 			sourceTree = "<group>";
 		};
-		ADA47C40226D8C9E00500FAA /* Delegate */ = {
+		ADA47C40226D8C9E00500FAA /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
 				ADA47C41226D8CAE00500FAA /* CreateCompanyControllerDelegate.swift */,
 			);
-			path = Delegate;
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,6 +238,7 @@
 				ADA47C30226D31E600500FAA /* RootNavigationController.swift in Sources */,
 				ADA47C3D226D5F0700500FAA /* CreateCompanyController.swift in Sources */,
 				ADA47C38226D522200500FAA /* UIColor+theme.swift in Sources */,
+				ADA47C45226D901600500FAA /* CompaniesModels.xcdatamodeld in Sources */,
 				ADA47C35226D510F00500FAA /* CompanyCell.swift in Sources */,
 				ADA47C3B226D5C0600500FAA /* Company.swift in Sources */,
 			);
@@ -436,6 +440,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		ADA47C43226D901600500FAA /* CompaniesModels.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				ADA47C44226D901600500FAA /* CompaniesModels.xcdatamodel */,
+			);
+			currentVersion = ADA47C44226D901600500FAA /* CompaniesModels.xcdatamodel */;
+			path = CompaniesModels.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = ADA47C0D226D2D4D00500FAA /* Project object */;
 }
