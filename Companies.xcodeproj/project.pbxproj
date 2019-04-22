@@ -17,6 +17,8 @@
 		ADA47C38226D522200500FAA /* UIColor+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA47C37226D522200500FAA /* UIColor+theme.swift */; };
 		ADA47C3B226D5C0600500FAA /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA47C3A226D5C0600500FAA /* Company.swift */; };
 		ADA47C3D226D5F0700500FAA /* CreateCompanyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA47C3C226D5F0700500FAA /* CreateCompanyController.swift */; };
+		ADA47C3F226D662600500FAA /* CreateCompanyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA47C3E226D662600500FAA /* CreateCompanyView.swift */; };
+		ADA47C42226D8CAE00500FAA /* CreateCompanyControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA47C41226D8CAE00500FAA /* CreateCompanyControllerDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		ADA47C37226D522200500FAA /* UIColor+theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+theme.swift"; sourceTree = "<group>"; };
 		ADA47C3A226D5C0600500FAA /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
 		ADA47C3C226D5F0700500FAA /* CreateCompanyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCompanyController.swift; sourceTree = "<group>"; };
+		ADA47C3E226D662600500FAA /* CreateCompanyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCompanyView.swift; sourceTree = "<group>"; };
+		ADA47C41226D8CAE00500FAA /* CreateCompanyControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCompanyControllerDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,7 @@
 		ADA47C17226D2D4D00500FAA /* Companies */ = {
 			isa = PBXGroup;
 			children = (
+				ADA47C40226D8C9E00500FAA /* Delegate */,
 				ADA47C36226D520600500FAA /* Extension */,
 				ADA47C2D226D2E7600500FAA /* SupportingFiles */,
 				ADA47C2A226D2E5100500FAA /* Model */,
@@ -139,8 +144,17 @@
 			isa = PBXGroup;
 			children = (
 				ADA47C34226D510F00500FAA /* CompanyCell.swift */,
+				ADA47C3E226D662600500FAA /* CreateCompanyView.swift */,
 			);
 			path = Comapnies;
+			sourceTree = "<group>";
+		};
+		ADA47C40226D8C9E00500FAA /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				ADA47C41226D8CAE00500FAA /* CreateCompanyControllerDelegate.swift */,
+			);
+			path = Delegate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,6 +228,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADA47C42226D8CAE00500FAA /* CreateCompanyControllerDelegate.swift in Sources */,
+				ADA47C3F226D662600500FAA /* CreateCompanyView.swift in Sources */,
 				ADA47C19226D2D4D00500FAA /* AppDelegate.swift in Sources */,
 				ADA47C32226D328400500FAA /* CompaniesController.swift in Sources */,
 				ADA47C30226D31E600500FAA /* RootNavigationController.swift in Sources */,
