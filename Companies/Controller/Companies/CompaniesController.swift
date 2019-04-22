@@ -50,7 +50,7 @@ class CompaniesController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: companyCellId, for: indexPath) as! CompanyCell
-        cell.backgroundColor = .yellow
+        cell.backgroundColor = .tealColor
         return cell
     }
 }
