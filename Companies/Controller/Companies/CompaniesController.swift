@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CompaniesController: UIViewController {
+class CompaniesController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -16,8 +16,9 @@ class CompaniesController: UIViewController {
     
     ///Set up initial UI layouts and attributes
     fileprivate func setup(){
-        //View setup
-        view.backgroundColor = .white
+        //TableView
+        tableView.backgroundColor = UIColor(red: 9/255, green: 45/255, blue: 64/255, alpha: 1)
+        tableView.separatorStyle = .none
         
         //Nav set up
         navigationItem.title = "Companies"

@@ -25,5 +25,6 @@ class RootNavigationController: UINavigationController {
         navigationBar.tintColor = .white
         navigationBar.prefersLargeTitles = true
         navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+        navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
     }
 }
