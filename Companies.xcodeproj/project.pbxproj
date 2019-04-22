@@ -16,6 +16,7 @@
 		ADA47C35226D510F00500FAA /* CompanyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA47C34226D510F00500FAA /* CompanyCell.swift */; };
 		ADA47C38226D522200500FAA /* UIColor+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA47C37226D522200500FAA /* UIColor+theme.swift */; };
 		ADA47C3B226D5C0600500FAA /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA47C3A226D5C0600500FAA /* Company.swift */; };
+		ADA47C3D226D5F0700500FAA /* CreateCompanyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA47C3C226D5F0700500FAA /* CreateCompanyController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		ADA47C34226D510F00500FAA /* CompanyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyCell.swift; sourceTree = "<group>"; };
 		ADA47C37226D522200500FAA /* UIColor+theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+theme.swift"; sourceTree = "<group>"; };
 		ADA47C3A226D5C0600500FAA /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
+		ADA47C3C226D5F0700500FAA /* CreateCompanyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCompanyController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				ADA47C31226D328400500FAA /* CompaniesController.swift */,
+				ADA47C3C226D5F0700500FAA /* CreateCompanyController.swift */,
 			);
 			path = Companies;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 				ADA47C19226D2D4D00500FAA /* AppDelegate.swift in Sources */,
 				ADA47C32226D328400500FAA /* CompaniesController.swift in Sources */,
 				ADA47C30226D31E600500FAA /* RootNavigationController.swift in Sources */,
+				ADA47C3D226D5F0700500FAA /* CreateCompanyController.swift in Sources */,
 				ADA47C38226D522200500FAA /* UIColor+theme.swift in Sources */,
 				ADA47C35226D510F00500FAA /* CompanyCell.swift in Sources */,
 				ADA47C3B226D5C0600500FAA /* Company.swift in Sources */,

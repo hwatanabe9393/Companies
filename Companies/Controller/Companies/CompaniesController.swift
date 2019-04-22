@@ -36,6 +36,8 @@ class CompaniesController: UITableViewController {
     
     @objc func handleAddCompany(_ sender: Any){
         //TODO:- Add Company
+        let createCompanyNavigationController = RootNavigationController(rootViewController: CreateCompanyController())
+        present(createCompanyNavigationController, animated: true, completion: nil)
     }
     
     @objc func handleResetCompany(_ sender: Any){
@@ -65,6 +67,7 @@ class CompaniesController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: companyCellId, for: indexPath) as! CompanyCell
         cell.textLabel?.text = companies[indexPath.row].name
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        cell.textLabel?.textColor = .white
         cell.backgroundColor = .tealColor
         return cell
     }
