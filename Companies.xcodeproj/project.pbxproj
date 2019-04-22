@@ -15,6 +15,7 @@
 		ADA47C32226D328400500FAA /* CompaniesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA47C31226D328400500FAA /* CompaniesController.swift */; };
 		ADA47C35226D510F00500FAA /* CompanyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA47C34226D510F00500FAA /* CompanyCell.swift */; };
 		ADA47C38226D522200500FAA /* UIColor+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA47C37226D522200500FAA /* UIColor+theme.swift */; };
+		ADA47C3B226D5C0600500FAA /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA47C3A226D5C0600500FAA /* Company.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		ADA47C31226D328400500FAA /* CompaniesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesController.swift; sourceTree = "<group>"; };
 		ADA47C34226D510F00500FAA /* CompanyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyCell.swift; sourceTree = "<group>"; };
 		ADA47C37226D522200500FAA /* UIColor+theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+theme.swift"; sourceTree = "<group>"; };
+		ADA47C3A226D5C0600500FAA /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,7 +74,7 @@
 		ADA47C2A226D2E5100500FAA /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				ADA47C34226D510F00500FAA /* CompanyCell.swift */,
+				ADA47C3A226D5C0600500FAA /* Company.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -80,6 +82,7 @@
 		ADA47C2B226D2E5D00500FAA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				ADA47C39226D543D00500FAA /* Comapnies */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -127,6 +130,14 @@
 				ADA47C37226D522200500FAA /* UIColor+theme.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		ADA47C39226D543D00500FAA /* Comapnies */ = {
+			isa = PBXGroup;
+			children = (
+				ADA47C34226D510F00500FAA /* CompanyCell.swift */,
+			);
+			path = Comapnies;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,6 +216,7 @@
 				ADA47C30226D31E600500FAA /* RootNavigationController.swift in Sources */,
 				ADA47C38226D522200500FAA /* UIColor+theme.swift in Sources */,
 				ADA47C35226D510F00500FAA /* CompanyCell.swift in Sources */,
+				ADA47C3B226D5C0600500FAA /* Company.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

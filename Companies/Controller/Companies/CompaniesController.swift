@@ -10,20 +10,23 @@ import UIKit
 
 class CompaniesController: UITableViewController {
     let companyCellId = "companyCellId"
-    
+    let companies = [
+        Company(name: "Google", founded: Date()),
+        Company(name: "FaceBook", founded: Date()),
+        Company(name: "Amazon", founded: Date())
+    ]
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView.register(CompanyCell.self, forCellReuseIdentifier: companyCellId)
-        
         setup()
     }
     
-    ///Set up initial UI layouts and attributes
+    ///Set up initialize UI layouts and attributes
     fileprivate func setup(){
         //TableView
-        tableView.backgroundColor = UIColor(red: 9/255, green: 45/255, blue: 64/255, alpha: 1)
+        tableView.register(CompanyCell.self, forCellReuseIdentifier: companyCellId)
+        tableView.backgroundColor = .darkBlue
         tableView.tableFooterView = UIView()
+        tableView.separatorColor = .white
         
         //Nav set up
         navigationItem.title = "Companies"
@@ -41,15 +44,27 @@ class CompaniesController: UITableViewController {
     
     //MARK:- TableView
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return companies.count
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = UIView()
+        header.backgroundColor = .lightBlue
+        return header
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: companyCellId, for: indexPath) as! CompanyCell
+        cell.textLabel?.text = companies[indexPath.row].name
+        cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         cell.backgroundColor = .tealColor
         return cell
     }
