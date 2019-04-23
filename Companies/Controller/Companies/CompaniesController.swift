@@ -89,6 +89,29 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
         return 50
     }
     
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") {[unowned self] (_, indexPath) in
+            //remove the company from our tableview
+            let removedCompany = self.companies.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            
+            //remove from coredata
+            let context = CoreDataManager.shared.persistentContainer.viewContext
+            context.delete(removedCompany)
+            do{
+                try context.save()
+            }catch let error{
+                print("Failed to delete company: ", error)
+            }
+        }
+        
+        let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (_, indexPath) in
+            
+        }
+        
+        return [deleteAction, editAction]
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: companyCellId, for: indexPath) as! CompanyCell
         cell.textLabel?.text = companies[indexPath.row].name
