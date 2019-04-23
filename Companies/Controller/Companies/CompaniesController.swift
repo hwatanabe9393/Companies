@@ -68,8 +68,6 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
         self.tableView.insertRows(at: [indexPath], with: .fade)
     }
     
-    
-    
     //MARK:- TableView
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -90,26 +88,29 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
     }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") {[unowned self] (_, indexPath) in
-            //remove the company from our tableview
-            let removedCompany = self.companies.remove(at: indexPath.row)
-            self.tableView.deleteRows(at: [indexPath], with: .automatic)
-            
-            //remove from coredata
-            let context = CoreDataManager.shared.persistentContainer.viewContext
-            context.delete(removedCompany)
-            do{
-                try context.save()
-            }catch let error{
-                print("Failed to delete company: ", error)
-            }
-        }
-        
-        let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (_, indexPath) in
-            
-        }
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete", handler: deleteActionHandler)
+        let editAction = UITableViewRowAction(style: .normal, title: "Edit", handler: editActionHandler)
         
         return [deleteAction, editAction]
+    }
+    
+    fileprivate func deleteActionHandler(action: UITableViewRowAction, indexPath: IndexPath){
+        //remove the company from our tableview
+        let removedCompany = self.companies.remove(at: indexPath.row)
+        self.tableView.deleteRows(at: [indexPath], with: .automatic)
+        
+        //remove from coredata
+        let context = CoreDataManager.shared.persistentContainer.viewContext
+        context.delete(removedCompany)
+        do{
+            try context.save()
+        }catch let error{
+            print("Failed to delete company: ", error)
+        }
+    }
+    
+    fileprivate func editActionHandler(action: UITableViewRowAction, indexPath: IndexPath){
+        
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
