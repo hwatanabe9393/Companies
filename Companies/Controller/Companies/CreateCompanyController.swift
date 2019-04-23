@@ -52,16 +52,7 @@ class CreateCompanyController: UIViewController {
             guard let name = self?.createCompanyView.nameTextField.text else{
                 return
             }
-            
-            // Initialization core data stack
-            let persistentContainer = NSPersistentContainer(name: "CompaniesModels")
-            persistentContainer.loadPersistentStores(completionHandler: { (storeDescription, error) in
-                if let error = error{
-                    fatalError("Loading of store failed: \(error)")
-                }
-            })
-            
-            let context = persistentContainer.viewContext
+            let context = CoreDataManager.shared.persistentContainer.viewContext
             guard let company = NSEntityDescription.insertNewObject(forEntityName: "Company", into: context) as? Company else{
                 return
             }

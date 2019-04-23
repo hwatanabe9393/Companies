@@ -31,18 +31,11 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
         //Nav set up
         navigationItem.title = "Companies"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(handleAddCompany(_:)))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "reset", style: .plain, target: self, action: #selector(handleAddCompany(_:)))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "reset", style: .plain, target: self, action: #selector(handleResetCompany(_:)))
     }
     
     fileprivate func fetchCompanies(){
-        // Initialization core data stack
-        let persistentContainer = NSPersistentContainer(name: "CompaniesModels")
-        persistentContainer.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error{
-                fatalError("Loading of store failed: \(error)")
-            }
-        })
-        let context = persistentContainer.viewContext
+        let context = CoreDataManager.shared.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<Company>(entityName: "Company")
         do{
             self.companies = try context.fetch(fetchRequest)
