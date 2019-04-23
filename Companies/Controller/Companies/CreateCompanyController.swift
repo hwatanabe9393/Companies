@@ -60,14 +60,18 @@ class CreateCompanyController: UIViewController {
                     fatalError("Loading of store failed: \(error)")
                 }
             })
+            
             let context = persistentContainer.viewContext
-            let company = NSEntityDescription.insertNewObject(forEntityName: "Company", into: context)
+            guard let company = NSEntityDescription.insertNewObject(forEntityName: "Company", into: context) as? Company else{
+                return
+            }
             
             company.setValue(name, forKey: "name")
             
             //Perform core data save
             do{
                 try context.save()
+                self?.delegate?.didAddCompany(company: company)
             }catch let error{
                 print("Error while saving CD: \(error)")
             }
