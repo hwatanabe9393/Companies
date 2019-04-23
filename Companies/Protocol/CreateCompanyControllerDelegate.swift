@@ -10,4 +10,5 @@ import UIKit
 
 protocol CompanyModificationControllerDelegate{
     func didAddCompany(company: Company)
+    func didEditCompany(indexPath: IndexPath)
 }

@@ -17,20 +17,22 @@ class CompanyModificationController: UIViewController {
     
     fileprivate let option: ModificationOption
     fileprivate var company: Company?
+    fileprivate let indexPath: IndexPath?
     
     var delegate: CompanyModificationControllerDelegate?
-    fileprivate var createCompanyView: CreateCompanyView!
+    fileprivate var companyModificationView: CompanyModificationView!
     
     ///This initializer must be used for initializing this class. For editing option, non-nil company must be passed.
-    required init(option: ModificationOption, company: Company? = nil){
+    required init(option: ModificationOption, for indexPath: IndexPath? = nil , company: Company? = nil){
         if option == .create && company != nil{
             fatalError("For creating CompanyModificationController, non-nil copmany must be passed but received nil.")
         }
-        if option == .edit && company == nil{
+        if option == .edit && (indexPath == nil || company == nil){
             fatalError("For editing CompanyModificationController, nil copmany must be passed but received non-nil.")
         }
         self.option = option
         self.company = company
+        self.indexPath = indexPath
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -52,18 +54,23 @@ class CompanyModificationController: UIViewController {
         //Views
         view.backgroundColor = .lightBlue
         setLayout()
+        
+        //Company name if edit
+        if option == .edit{
+            companyModificationView.nameTextField.text = company?.name ?? ""
+        }
     }
     
     fileprivate func setLayout(){
-        createCompanyView = CreateCompanyView()
-        createCompanyView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(createCompanyView)
+        companyModificationView = CompanyModificationView()
+        companyModificationView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(companyModificationView)
         
         NSLayoutConstraint.activate([
-            createCompanyView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            createCompanyView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            createCompanyView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            createCompanyView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            companyModificationView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            companyModificationView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            companyModificationView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            companyModificationView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
             ])
     }
     
@@ -73,22 +80,32 @@ class CompanyModificationController: UIViewController {
     
     @objc func handleSave(){
         dismiss(animated: true){[weak self] in
-            guard let name = self?.createCompanyView.nameTextField.text else{
+            guard let name = self?.companyModificationView.nameTextField.text else{
                 return
             }
             let context = CoreDataManager.shared.persistentContainer.viewContext
-            guard let company = NSEntityDescription.insertNewObject(forEntityName: "Company", into: context) as? Company else{
-                return
-            }
-            
-            company.setValue(name, forKey: "name")
-            
-            //Perform core data save
-            do{
-                try context.save()
-                self?.delegate?.didAddCompany(company: company)
-            }catch let error{
-                print("Error while saving CD: \(error)")
+            if self?.option == .create{
+                guard let company = NSEntityDescription.insertNewObject(forEntityName: "Company", into: context) as? Company else{
+                    return
+                }
+                company.setValue(name, forKey: "name")
+                //Perform core data save
+                do{
+                    try context.save()
+                    self?.delegate?.didAddCompany(company: company)
+                }catch let error{
+                    print("Error while saving CD: \(error)")
+                }
+            }else if self?.option == .edit{
+                self?.company?.setValue(name, forKey: "name")
+                do{
+                    try context.save()
+                    if let indexPath = self?.indexPath{
+                        self?.delegate?.didEditCompany(indexPath: indexPath)
+                    }
+                }catch let error{
+                    print("Error while update edit:",error)
+                }
             }
         }
     }

@@ -50,8 +50,8 @@ class CompaniesController: UITableViewController, CompanyModificationControllerD
         present(getCompanyModificationController(option: .create), animated: true, completion: nil)
     }
     
-    fileprivate func getCompanyModificationController(option: ModificationOption, company: Company? = nil)->RootNavigationController{
-        let companyModificationController = CompanyModificationController(option: option, company: company)
+    fileprivate func getCompanyModificationController(option: ModificationOption, for indexPath: IndexPath? = nil, company: Company? = nil)->RootNavigationController{
+        let companyModificationController = CompanyModificationController(option: option, for: indexPath, company: company)
         companyModificationController.delegate = self
         
         let companyModificationNavigationController = RootNavigationController(rootViewController: companyModificationController)
@@ -60,16 +60,6 @@ class CompaniesController: UITableViewController, CompanyModificationControllerD
     
     @objc func handleResetCompany(_ sender: Any){
         //TODO:- Reset company
-    }
-    
-    
-    
-    //MARK:- CreateCompanyController
-    func didAddCompany(company: Company) {
-        self.companies.append(company)
-        
-        let indexPath = IndexPath(row: self.companies.count - 1, section: 0)
-        self.tableView.insertRows(at: [indexPath], with: .fade)
     }
     
     //MARK:- TableView
@@ -114,7 +104,7 @@ class CompaniesController: UITableViewController, CompanyModificationControllerD
     }
     
     fileprivate func editActionHandler(action: UITableViewRowAction, indexPath: IndexPath){
-        present(getCompanyModificationController(option: .edit, company: companies[indexPath.row]), animated: true, completion: nil)
+        present(getCompanyModificationController(option: .edit, for: indexPath, company: companies[indexPath.row]), animated: true, completion: nil)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -124,5 +114,19 @@ class CompaniesController: UITableViewController, CompanyModificationControllerD
         cell.textLabel?.textColor = .white
         cell.backgroundColor = .tealColor
         return cell
+    }
+}
+
+//MARK:- CompanyModificationController
+extension CompaniesController{
+    func didAddCompany(company: Company) {
+        self.companies.append(company)
+        
+        let indexPath = IndexPath(row: self.companies.count - 1, section: 0)
+        self.tableView.insertRows(at: [indexPath], with: .fade)
+    }
+    
+    func didEditCompany(indexPath: IndexPath) {
+        tableView.reloadRows(at: [indexPath], with: .automatic)
     }
 }

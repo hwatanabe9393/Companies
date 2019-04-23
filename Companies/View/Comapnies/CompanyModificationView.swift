@@ -1,5 +1,5 @@
 //
-//  CreateCompanyView.swift
+//  CompanyModificationView.swift
 //  Companies
 //
 //  Created by Hikaru Watanabe on 4/21/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateCompanyView: UIView {
+class CompanyModificationView: UIView {
     let nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 18)
