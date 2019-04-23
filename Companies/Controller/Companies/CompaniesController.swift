@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class CompaniesController: UITableViewController, CreateCompanyControllerDelegate {
+class CompaniesController: UITableViewController, CompanyModificationControllerDelegate {
     let companyCellId = "companyCellId"
     var companies = [Company]()
 
@@ -47,11 +47,15 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
     }
     
     @objc func handleAddCompany(_ sender: Any){
-        let createCompanyController = CreateCompanyController()
-        createCompanyController.delegate = self
+        present(getCompanyModificationController(option: .create), animated: true, completion: nil)
+    }
+    
+    fileprivate func getCompanyModificationController(option: ModificationOption, company: Company? = nil)->RootNavigationController{
+        let companyModificationController = CompanyModificationController(option: option, company: company)
+        companyModificationController.delegate = self
         
-        let createCompanyNavigationController = RootNavigationController(rootViewController: createCompanyController)
-        present(createCompanyNavigationController, animated: true, completion: nil)
+        let companyModificationNavigationController = RootNavigationController(rootViewController: companyModificationController)
+        return companyModificationNavigationController
     }
     
     @objc func handleResetCompany(_ sender: Any){
@@ -110,7 +114,7 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
     }
     
     fileprivate func editActionHandler(action: UITableViewRowAction, indexPath: IndexPath){
-        
+        present(getCompanyModificationController(option: .edit, company: companies[indexPath.row]), animated: true, completion: nil)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -8,6 +8,6 @@
 
 import UIKit
 
-protocol CreateCompanyControllerDelegate{
+protocol CompanyModificationControllerDelegate{
     func didAddCompany(company: Company)
 }

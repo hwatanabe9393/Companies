@@ -9,10 +9,34 @@
 import UIKit
 import CoreData
 
-class CreateCompanyController: UIViewController {
-    var delegate: CreateCompanyControllerDelegate?
+enum ModificationOption{
+    case create, edit
+}
+
+class CompanyModificationController: UIViewController {
     
+    fileprivate let option: ModificationOption
+    fileprivate var company: Company?
+    
+    var delegate: CompanyModificationControllerDelegate?
     fileprivate var createCompanyView: CreateCompanyView!
+    
+    ///This initializer must be used for initializing this class. For editing option, non-nil company must be passed.
+    required init(option: ModificationOption, company: Company? = nil){
+        if option == .create && company != nil{
+            fatalError("For creating CompanyModificationController, non-nil copmany must be passed but received nil.")
+        }
+        if option == .edit && company == nil{
+            fatalError("For editing CompanyModificationController, nil copmany must be passed but received non-nil.")
+        }
+        self.option = option
+        self.company = company
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +45,7 @@ class CreateCompanyController: UIViewController {
     
     fileprivate func setup(){
         //NavBar
-        navigationItem.title = "Create Company"
+        navigationItem.title = option == .create ? "Create Company" : "Edit Company"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(handleCancel))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(handleSave))
         
