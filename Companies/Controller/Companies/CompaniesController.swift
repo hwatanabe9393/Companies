@@ -84,7 +84,7 @@ class CompaniesController: UITableViewController, CompanyModificationControllerD
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete", handler: deleteActionHandler)
         let editAction = UITableViewRowAction(style: .normal, title: "Edit", handler: editActionHandler)
-        
+        editAction.backgroundColor = .darkBlue
         return [deleteAction, editAction]
     }
     
