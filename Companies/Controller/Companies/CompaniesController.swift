@@ -109,7 +109,18 @@ class CompaniesController: UITableViewController, CompanyModificationControllerD
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: companyCellId, for: indexPath) as! CompanyCell
-        cell.textLabel?.text = companies[indexPath.row].name
+        var text = ""
+        if let name = companies[indexPath.row].name{
+            text += name
+        }
+        if let founded = companies[indexPath.row].founded{
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMM dd, yyyy"
+            let date = dateFormatter.string(from: founded)
+            text += " - \(date)"
+        }
+        
+        cell.textLabel?.text = text
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         cell.textLabel?.textColor = .white
         cell.backgroundColor = .tealColor

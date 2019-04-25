@@ -55,9 +55,10 @@ class CompanyModificationController: UIViewController {
         view.backgroundColor = .lightBlue
         setLayout()
         
-        //Company name if edit
+        //Company info if edit
         if option == .edit{
             companyModificationView.nameTextField.text = company?.name ?? ""
+            companyModificationView.datePicker.date = company?.founded ?? Date()
         }
     }
     
@@ -70,7 +71,7 @@ class CompanyModificationController: UIViewController {
             companyModificationView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             companyModificationView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             companyModificationView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            companyModificationView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            companyModificationView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             ])
     }
     
@@ -80,7 +81,7 @@ class CompanyModificationController: UIViewController {
     
     @objc func handleSave(){
         dismiss(animated: true){[weak self] in
-            guard let name = self?.companyModificationView.nameTextField.text else{
+            guard let name = self?.companyModificationView.nameTextField.text, let date = self?.companyModificationView.datePicker.date else{
                 return
             }
             let context = CoreDataManager.shared.persistentContainer.viewContext
@@ -89,6 +90,7 @@ class CompanyModificationController: UIViewController {
                     return
                 }
                 company.setValue(name, forKey: "name")
+                company.setValue(date, forKey: "founded")
                 //Perform core data save
                 do{
                     try context.save()
@@ -96,8 +98,10 @@ class CompanyModificationController: UIViewController {
                 }catch let error{
                     print("Error while saving CD: \(error)")
                 }
+                
             }else if self?.option == .edit{
                 self?.company?.setValue(name, forKey: "name")
+                self?.company?.setValue(date, forKey: "founded")
                 do{
                     try context.save()
                     if let indexPath = self?.indexPath{

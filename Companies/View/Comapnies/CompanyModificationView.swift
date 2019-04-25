@@ -9,6 +9,7 @@
 import UIKit
 
 class CompanyModificationView: UIView {
+    let padding:CGFloat = 12
     let nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 18)
@@ -24,6 +25,13 @@ class CompanyModificationView: UIView {
         return tf
     }()
     
+    let datePicker: UIDatePicker = {
+        let dp = UIDatePicker()
+        dp.datePickerMode = .date
+        return dp
+    }()
+
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         setLayout()
@@ -31,20 +39,26 @@ class CompanyModificationView: UIView {
     
     func setLayout(){
         let nameLabelWidth = nameLabel.frame.width
+        let nameLabelHeight = nameLabel.frame.height
         let nameStackView = UIStackView(arrangedSubviews: [nameLabel,nameTextField])
         nameStackView.axis = .horizontal
-        nameStackView.spacing = 16
-        nameStackView.translatesAutoresizingMaskIntoConstraints = false
+        nameStackView.spacing = padding
         
-        self.addSubview(nameStackView)
+        let modificationStackView = UIStackView(arrangedSubviews: [nameStackView, datePicker])
+        modificationStackView.axis = .vertical
+        modificationStackView.spacing = padding
+        modificationStackView.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(modificationStackView)
         
         NSLayoutConstraint.activate([
-            nameStackView.topAnchor.constraint(equalTo: self.topAnchor),
-            nameStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            nameStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            nameStackView.heightAnchor.constraint(equalToConstant: 50),
+            modificationStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: padding),
+            modificationStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: padding),
+            modificationStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -1*padding),
 
             nameLabel.widthAnchor.constraint(equalToConstant: nameLabelWidth),
+            nameLabel.heightAnchor.constraint(equalToConstant: nameLabelHeight),
+            
+            datePicker.heightAnchor.constraint(equalToConstant: 250)
             ])
     }
     
