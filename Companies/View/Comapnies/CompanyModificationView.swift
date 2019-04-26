@@ -10,6 +10,25 @@ import UIKit
 
 class CompanyModificationView: UIView {
     let padding:CGFloat = 12
+    
+    weak var delegate: ImageSelectDelegate!{
+        didSet{
+            if let gesture = companyImageView.gestureRecognizers{
+                companyImageView.removeGestureRecognizer(gesture.first!)
+            }
+            let tapGesture = UITapGestureRecognizer(target: delegate, action: #selector(delegate.imageDidTap(_:)))
+            companyImageView.addGestureRecognizer(tapGesture)
+        }
+    }
+    
+    let companyImageView: UIImageView = {
+        let imageView = UIImageView(image: #imageLiteral(resourceName: "NoImage"))
+        imageView.contentMode = .scaleAspectFit
+        imageView.isUserInteractionEnabled = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     let nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 18)
@@ -34,6 +53,7 @@ class CompanyModificationView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
+        
         setLayout()
     }
     
@@ -44,7 +64,7 @@ class CompanyModificationView: UIView {
         nameStackView.axis = .horizontal
         nameStackView.spacing = padding
         
-        let modificationStackView = UIStackView(arrangedSubviews: [nameStackView, datePicker])
+        let modificationStackView = UIStackView(arrangedSubviews: [companyImageView, nameStackView, datePicker])
         modificationStackView.axis = .vertical
         modificationStackView.spacing = padding
         modificationStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -54,7 +74,10 @@ class CompanyModificationView: UIView {
             modificationStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: padding),
             modificationStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: padding),
             modificationStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -1*padding),
-
+            
+            companyImageView.heightAnchor.constraint(equalToConstant: 100),
+            companyImageView.centerXAnchor.constraint(equalTo: modificationStackView.centerXAnchor),
+            
             nameLabel.widthAnchor.constraint(equalToConstant: nameLabelWidth),
             nameLabel.heightAnchor.constraint(equalToConstant: nameLabelHeight),
             

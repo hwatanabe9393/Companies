@@ -64,6 +64,7 @@ class CompanyModificationController: UIViewController {
     
     fileprivate func setLayout(){
         companyModificationView = CompanyModificationView()
+        companyModificationView.delegate = self
         companyModificationView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(companyModificationView)
         
@@ -113,5 +114,27 @@ class CompanyModificationController: UIViewController {
             }
         }
     }
+}
+
+extension CompanyModificationController: ImageSelectDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    @objc func imageDidTap(_ sender: Any) {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.sourceType = .photoLibrary
+        imagePickerController.allowsEditing = true
+        present(imagePickerController, animated: true)
+    }
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let edittedImage = info[.editedImage] as? UIImage{
+            companyModificationView.companyImageView.image = edittedImage
+        }else if let originalImage = info[.originalImage] as? UIImage{
+            companyModificationView.companyImageView.image = originalImage
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
 }

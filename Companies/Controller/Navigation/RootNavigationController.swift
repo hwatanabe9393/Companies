@@ -9,10 +9,6 @@
 import UIKit
 
 class RootNavigationController: UINavigationController {
-    override var preferredStatusBarStyle: UIStatusBarStyle{
-        return .lightContent
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -26,5 +22,11 @@ class RootNavigationController: UINavigationController {
         navigationBar.prefersLargeTitles = true
         navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
         navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+    }
+}
+
+extension UINavigationController{
+    override open var preferredStatusBarStyle: UIStatusBarStyle{
+        return .lightContent
     }
 }
