@@ -63,8 +63,11 @@ class CompanyModificationView: UIView {
         let nameStackView = UIStackView(arrangedSubviews: [nameLabel,nameTextField])
         nameStackView.axis = .horizontal
         nameStackView.spacing = padding
+        let imageStackView = UIStackView(arrangedSubviews: [UIView(), companyImageView, UIView()])
+        imageStackView.axis = .horizontal
+        imageStackView.spacing = 0
         
-        let modificationStackView = UIStackView(arrangedSubviews: [companyImageView, nameStackView, datePicker])
+        let modificationStackView = UIStackView(arrangedSubviews: [imageStackView, nameStackView, datePicker])
         modificationStackView.axis = .vertical
         modificationStackView.spacing = padding
         modificationStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -76,6 +79,7 @@ class CompanyModificationView: UIView {
             modificationStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -1*padding),
             
             companyImageView.heightAnchor.constraint(equalToConstant: 100),
+            companyImageView.widthAnchor.constraint(equalToConstant: 100),
             companyImageView.centerXAnchor.constraint(equalTo: modificationStackView.centerXAnchor),
             
             nameLabel.widthAnchor.constraint(equalToConstant: nameLabelWidth),

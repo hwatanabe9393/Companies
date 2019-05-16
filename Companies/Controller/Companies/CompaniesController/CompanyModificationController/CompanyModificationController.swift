@@ -20,7 +20,7 @@ class CompanyModificationController: UIViewController {
     fileprivate let indexPath: IndexPath?
     
     var delegate: CompanyModificationControllerDelegate?
-    fileprivate var companyModificationView: CompanyModificationView!
+    internal var companyModificationView: CompanyModificationView!
     
     ///This initializer must be used for initializing this class. For editing option, non-nil company must be passed.
     required init(option: ModificationOption, for indexPath: IndexPath? = nil , company: Company? = nil){
@@ -59,6 +59,10 @@ class CompanyModificationController: UIViewController {
         if option == .edit{
             companyModificationView.nameTextField.text = company?.name ?? ""
             companyModificationView.datePicker.date = company?.founded ?? Date()
+            if let imageData = company?.imageData, let image = UIImage(data: imageData){
+                companyModificationView.companyImageView.image = image
+                setImageLayer()
+            }
         }
     }
     
@@ -76,6 +80,14 @@ class CompanyModificationController: UIViewController {
             ])
     }
     
+    internal func setImageLayer(){
+        let imageView = companyModificationView.companyImageView
+        imageView.layer.cornerRadius = imageView.frame.width/2
+        imageView.clipsToBounds = true
+        imageView.layer.borderColor = UIColor.darkBlue.cgColor
+        imageView.layer.borderWidth = 2
+    }
+    
     @objc func handleCancel(){
         dismiss(animated: true, completion: nil)
     }
@@ -90,8 +102,13 @@ class CompanyModificationController: UIViewController {
                 guard let company = NSEntityDescription.insertNewObject(forEntityName: "Company", into: context) as? Company else{
                     return
                 }
+                
                 company.setValue(name, forKey: "name")
                 company.setValue(date, forKey: "founded")
+                if let image = self?.companyModificationView.companyImageView.image, let imageData = image.jpegData(compressionQuality: 0.8){
+                    company.setValue(imageData, forKey: "imageData")
+                }
+                
                 //Perform core data save
                 do{
                     try context.save()
@@ -103,6 +120,9 @@ class CompanyModificationController: UIViewController {
             }else if self?.option == .edit{
                 self?.company?.setValue(name, forKey: "name")
                 self?.company?.setValue(date, forKey: "founded")
+                if let image = self?.companyModificationView.companyImageView.image, let imageData = image.jpegData(compressionQuality: 0.8){
+                    self?.company?.setValue(imageData, forKey: "imageData")
+                }
                 do{
                     try context.save()
                     if let indexPath = self?.indexPath{
@@ -113,28 +133,5 @@ class CompanyModificationController: UIViewController {
                 }
             }
         }
-    }
-}
-
-extension CompanyModificationController: ImageSelectDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
-    @objc func imageDidTap(_ sender: Any) {
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.delegate = self
-        imagePickerController.sourceType = .photoLibrary
-        imagePickerController.allowsEditing = true
-        present(imagePickerController, animated: true)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let edittedImage = info[.editedImage] as? UIImage{
-            companyModificationView.companyImageView.image = edittedImage
-        }else if let originalImage = info[.originalImage] as? UIImage{
-            companyModificationView.companyImageView.image = originalImage
-        }
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
     }
 }
